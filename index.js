@@ -1,18 +1,20 @@
 const myCanvas = document.querySelector("#my-canvas");
 const context = myCanvas.getContext("2d");
 
-const gradient = context.createLinearGradient(0, 0, 2000, 0);
+const gradient = context.createLinearGradient(0, 0, 1600, 0);
 gradient.addColorStop(0, "limegreen");
 gradient.addColorStop(1, "blue");
 context.lineWidth = 2;
 context.strokeStyle = gradient;
 context.fillStyle = "white";
 //
+const canvasWidth = 1600;
+const canvasHeight = 800;
 const pointRadius = 2;
 const numberOfPoints = 130;
 const allowedDistanceBP = 300;
-const xThreshold = [-50, 2050];
-const yThreshold = [-50, 1050];
+const xThreshold = [-50, canvasWidth + 50];
+const yThreshold = [-50, canvasHeight + 50];
 const xRateChange = 3;
 const yRateChange = 4;
 const frameRate = 30;
@@ -113,5 +115,5 @@ function createRandomPoint(point) {
 function calculatePosition(x, y) {
   const newX = (2000 * x) / window.innerWidth;
   const newY = (1000 * y) / window.innerHeight;
-  return [newX, newY];
+  return [x, y];
 }
