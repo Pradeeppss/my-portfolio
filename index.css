@@ -1,0 +1,111 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+html {
+  color-scheme: dark light;
+}
+body {
+  --color-primary: #132043;
+  --color-secondary: #61677a;
+  --color-tertiary: #d8d9da;
+  background-color: var(--color-primary);
+  font-family: Poppins, sans-serif;
+  color: white;
+}
+/* utility classes */
+.btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* heading */
+
+.header {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+}
+.navbar {
+  background-color: #ffffff26;
+  backdrop-filter: blur(2px);
+  margin-left: auto;
+  width: fit-content;
+  border-radius: 0rem 0rem 0rem 0.3rem;
+}
+.navbar ul {
+  list-style-type: none;
+  display: flex;
+  padding: 0.2rem;
+  gap: 2rem;
+}
+.navbar li:nth-child(1) .nav-button {
+  border-radius: 0rem 0rem 0rem 0.2rem;
+}
+.nav-button {
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.nav-button:hover {
+  background-color: var(--color-tertiary);
+  color: var(--color-primary);
+}
+
+/* sections  */
+.full-sections {
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+  overflow: hidden;
+  isolation: isolate;
+  /* background-color: black; */
+}
+
+/* canvas */
+
+#my-canvas {
+  height: 100%;
+  width: 100vw;
+  position: absolute;
+  z-index: 0;
+}
+.intro-div {
+  /* background-color: red; */
+  position: relative;
+  padding: 10rem 5rem;
+  z-index: 10;
+  /* backface-visibility: blur; */
+}
+.intro-div h1 {
+  font-size: 5rem;
+}
+.intro-div p {
+  font-size: 1.3rem;
+}
+
+.grad-text {
+  background: linear-gradient(to right, #ff8080, #cdfad5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 800;
+}
+.link-div {
+  display: flex;
+  gap: 0.5rem;
+}
+.link-div a {
+  background-color: #ffffff26;
+  backdrop-filter: blur(2px);
+  padding: 0.5rem;
+  display: flex;
+  width: fit-content;
+  border-radius: 0.3rem;
+  text-decoration: none;
+  color: white;
+}
