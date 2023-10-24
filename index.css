@@ -57,30 +57,71 @@ body {
 }
 
 /* sections  */
+main {
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+  overflow: hidden;
+  position: relative;
+}
 .full-sections {
   height: 100vh;
   height: 100dvh;
   width: 100vw;
   overflow: hidden;
   isolation: isolate;
-  position: relative;
+  position: absolute;
   /* background-color: black; */
+  background-color: var(--color-primary);
+
+  transition: translate 500ms, opacity 500ms;
+}
+.full-sections[aria-expanded="false"] {
+  /* display: none; */
+  translate: 100%;
+  opacity: 0;
+}
+.full-sections:nth-child(1) {
+  z-index: 3;
+}
+.full-sections:nth-child(2) {
+  z-index: 2;
+}
+.full-sections:nth-child(3) {
+  z-index: 1;
 }
 
 /* canvas */
-
-#my-canvas {
-  min-height: 100vh;
-  min-width: 100vw;
+.front-section {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.canvas-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lime;
+  min-width: 500px;
+}
+#my-canvas1 {
+  border: 2px solid red;
+  /* min-height: 100%; */
+  /* min-width: 100%; */
   position: absolute;
   object-fit: cover;
-  z-index: 0;
+  z-index: 5;
+}
+.canvas1 {
 }
 .intro-div {
   /* background-color: red; */
   position: relative;
   padding: 10rem 5rem;
+  /* height: 100vh; */
   z-index: 10;
+  flex: 1;
+  /* backdrop-filter: blur(0px); */
   /* backface-visibility: blur; */
 }
 .intro-div h1 {
@@ -89,13 +130,19 @@ body {
 .intro-div p {
   font-size: 1.3rem;
 }
-
+@keyframes gradanimate {
+  100% {
+    background-position: -200%;
+  }
+}
 .grad-text {
-  background: linear-gradient(to right, #ff8080, #cdfad5);
+  background: linear-gradient(to right, #ff8080, #cdfad5, #cdfad5, #ff8080);
+  background-size: 200%;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   font-weight: 800;
+  animation: gradanimate 3s linear infinite;
 }
 .link-div {
   display: flex;
@@ -111,4 +158,9 @@ body {
   border-radius: 0.3rem;
   text-decoration: none;
   color: white;
+}
+.avatar {
+  opacity: 0;
+  z-index: -1;
+  /* display: none; */
 }
