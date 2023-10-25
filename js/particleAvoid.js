@@ -1,34 +1,36 @@
 function RunParticleAvoid() {
   const myCanvas = document.querySelector("#my-canvas1");
   const context = myCanvas.getContext("2d");
-  const img = document.querySelector(".avatar");
+  const codeImg = document.querySelector(".avatar");
   myCanvas.style.opacity = "0";
-
-  const gradient = context.createLinearGradient(0, 0, 1600, 0);
-  gradient.addColorStop(0, "limegreen");
-  gradient.addColorStop(1, "blue");
-  context.lineWidth = 2;
-  context.strokeStyle = gradient;
+  context.fillStyle = "white";
+  let intervalId;
+  let shoulIntervalRun = true;
+  let intervalRunningStatus = true;
   //
   const squareSize = 2;
   const squareContainSize = squareSize + 0;
-  const xOffset = 100;
-  const yOffset = 100;
-  const mouseCircleRadius = 25;
+  const Offset = 50;
+  const mouseCircleRadius = 35;
   // const mouseOuterCircleRadius = 1000;
-  const movementRate = 1;
+  const movementRate = 3;
   const frameRate = 40;
-  const imgHeight = img.offsetHeight;
-  const imgWidth = img.offsetWidth;
 
   const mousePos = {
     x: 5000,
     y: 5000,
   };
-  context.drawImage(img, 0, 0);
-  const imgData = context.getImageData(0, 0, img.offsetHeight, img.offsetWidth);
+  const imgWidth = codeImg.offsetWidth;
+  context.drawImage(codeImg, 0, 0);
+  const imgData = context.getImageData(
+    0,
+    0,
+    codeImg.offsetHeight,
+    codeImg.offsetWidth
+  );
   let xOff = 0;
   let yOff = 0;
+  let pixelWidth = 0;
   const pointsArray = [];
   for (let i = 0; i < imgData.data.length; i += 8) {
     let divider = 0;
@@ -76,18 +78,22 @@ function RunParticleAvoid() {
       divider++;
     }
     if (divider !== 0) {
-      red = red / divider;
-      green = green / divider;
-      blue = blue / divider;
+      red = 255 - red / divider;
+      green = 255 - green / divider;
+      blue = 255 - blue / divider;
     }
     if (!(tran1 === 0 || tran2 === 0 || tran3 === 0 || tran4 === 0)) {
       if (divider !== 0) {
+        // console.log(x, y);
         pointsArray.push([
-          xOff + 50,
-          yOff + 50,
-          xOff + 50,
-          yOff + 50,
-          `rgba(${red},${green},${blue})`,
+          Math.floor(Math.random() * 500),
+          Math.floor(Math.random() * 500),
+          xOff + Offset,
+          yOff + Offset,
+          `rgba(${red - xOff / 2 - yOff / 2},${green - yOff / 2},${
+            blue - xOff / 2 + yOff / 2
+          })`,
+          xOff + Offset,
         ]);
 
         context.beginPath();
@@ -95,48 +101,57 @@ function RunParticleAvoid() {
         context.fill();
       }
     }
-    if (xOff > imgWidth - 2) {
-      yOff += 2;
+    if (pixelWidth > imgWidth - 2) {
+      yOff += squareContainSize;
       xOff = 0;
+      pixelWidth = 0;
       i += imgWidth * 4;
     }
-    xOff += 2;
+    xOff += squareContainSize;
+    pixelWidth += 2;
   }
   console.log(pointsArray.length);
-  // for (let i = 0; i < squareNumber; i++) {
-  //   for (let j = 0; j < squareNumber; j++) {
-  //     let posX = startPos + squareContainSize * i;
-  //     let posY = startPos + squareContainSize * j;
-  //     pointsArray.push([posX, posY, posX, posY]);
-  //     context.beginPath();
-  //     context.rect(posX, posY, squareSize, squareSize);
-  //     context.fill();
-  //   }
-  // }
   context.clearRect(0, 0, myCanvas.offsetWidth, myCanvas.offsetHeight);
-  console.log(myCanvas.offsetWidth, myCanvas.offsetHeight);
-  img.style.display = "none";
+
   myCanvas.style.opacity = 1;
-  const intervalId = setInterval(() => {
-    drawNewPoints();
-  }, 1000 / frameRate);
-  // setTimeout(() => {
-  //   clearInterval(intervalId);
-  // }, 5000);
+  codeImg.style.display = "none";
+  //
+  function StartInterval() {
+    intervalRunningStatus = true;
+    const intervalId = setInterval(() => {
+      shoulIntervalRun = false;
+      drawNewPoints(pointsArray);
+    }, 1000 / frameRate);
+    return intervalId;
+  }
+  function closeInterval() {
+    intervalRunningStatus = false;
+    clearInterval(intervalId);
+  }
+  intervalId = StartInterval();
 
   //   main function
-  function drawNewPoints() {
+  function drawNewPoints(pointsArr) {
     context.clearRect(0, 0, myCanvas.width, myCanvas.height);
-    for (let i = 0; i < pointsArray.length; i++) {
-      const element = pointsArray[i];
-      movePointToDefaultPosition(element);
+    for (let i = 0; i < pointsArr.length; i++) {
+      const element = pointsArr[i];
+      // rotateImage(element);
       movePointOnCollission(element);
+      movePointToDefaultPosition(element);
       context.fillStyle = element[4];
       context.beginPath();
       context.rect(element[0], element[1], squareSize, squareSize);
       context.fill();
       // console.log("drawing");
     }
+    if (shoulIntervalRun === false) {
+      closeInterval();
+    }
+  }
+  function findDistanceBetween(point1, point2) {
+    let xDistance = (point1[0] - point2[0]) ** 2;
+    let yDistance = (point1[1] - point2[1]) ** 2;
+    return Math.sqrt(xDistance + yDistance);
   }
   function movePointOnCollission(point) {
     const distance = findDistanceBetween(point, [mousePos.x, mousePos.y]);
@@ -182,20 +197,22 @@ function RunParticleAvoid() {
   function movePointToDefaultPosition(point) {
     if (point[0] !== point[2] || point[1] !== point[3]) {
       if (
-        Math.abs(point[0] - point[2]) < 0.2 &&
-        Math.abs(point[1] - point[3]) < 0.2
+        Math.abs(point[0] - point[2]) < 0.3 &&
+        Math.abs(point[1] - point[3]) < 0.3
       ) {
         point[0] = point[2];
         point[1] = point[3];
         return;
       }
       const distance = findDistanceBetween(point, [point[2], point[3]]);
+      shoulIntervalRun = true;
+      pointMoved = true;
       moveCloser(point, distance);
     }
   }
   function moveCloser(point, distance) {
     // console.log("closer");
-    const movementSpeed = (movementRate * distance * 4) / mouseCircleRadius;
+    const movementSpeed = (movementRate * distance) / mouseCircleRadius;
     const x3 =
       ((point[0] - point[2]) * (distance - movementSpeed)) / distance +
       point[2];
@@ -205,9 +222,19 @@ function RunParticleAvoid() {
     point[0] = x3;
     point[1] = y3;
   }
-  myCanvas.addEventListener("mousemove", (e) => {
-    mousePos.x = e.offsetX;
-    mousePos.y = e.offsetY;
+  document.addEventListener("mousemove", (e) => {
+    if (e.target === myCanvas) {
+      mousePos.x = (e.offsetX / myCanvas.offsetWidth) * 500;
+      mousePos.y = (e.offsetY / myCanvas.offsetHeight) * 500;
+    } else {
+      mousePos.x = 5000;
+      mousePos.y = 5000;
+    }
+  });
+  myCanvas.addEventListener("mouseover", () => {
+    if (intervalRunningStatus === false) {
+      intervalId = StartInterval();
+    }
   });
 }
 RunParticleAvoid();

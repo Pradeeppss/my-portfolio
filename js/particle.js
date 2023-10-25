@@ -45,9 +45,9 @@ for (let i = 0; i < numberOfPoints; i++) {
 const intervalId = setInterval(() => {
   createNewPoint();
 }, 1000 / frameRate);
-setTimeout(() => {
-  clearInterval(intervalId);
-}, 1000);
+// setTimeout(() => {
+//   clearInterval(intervalId);
+// }, 1000);
 function createNewPoint() {
   context.clearRect(0, 0, myCanvas.width, myCanvas.height);
   for (let i = 0; i < pointsArray.length; i++) {
