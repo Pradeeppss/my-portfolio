@@ -101,34 +101,50 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid lime;
-  min-width: 500px;
+  position: relative;
+  z-index: 20;
 }
-#my-canvas1 {
-  border: 2px solid red;
-  /* min-height: 100%; */
-  /* min-width: 100%; */
+.canvas {
   position: absolute;
   object-fit: cover;
-  z-index: 5;
 }
 .canvas1 {
 }
 .intro-div {
-  /* background-color: red; */
+  flex: 0.9;
   position: relative;
   padding: 10rem 5rem;
-  /* height: 100vh; */
   z-index: 10;
-  flex: 1;
-  /* backdrop-filter: blur(0px); */
-  /* backface-visibility: blur; */
 }
 .intro-div h1 {
   font-size: 5rem;
 }
 .intro-div p {
   font-size: 1.3rem;
+}
+/*  about  */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.about-sections {
+}
+.about-sections > article {
+  border: 1px red solid;
+  padding: 1rem;
+}
+.skills {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem 0rem;
+  /* background-color: red; */
+}
+.skills > li {
+  background-color: var(--color-secondary);
+  padding: 0.5rem;
+  border-radius: 0.3rem;
 }
 @keyframes gradanimate {
   100% {
@@ -163,4 +179,17 @@ main {
   opacity: 0;
   z-index: -1;
   /* display: none; */
+}
+@media only screen and (max-width: 1000px) {
+  .intro-div {
+    padding: 1rem 5rem;
+    flex: 1;
+  }
+  .front-section {
+    flex-direction: column;
+  }
+  #my-canvas1 {
+    width: 300px;
+    aspect-ratio: 1;
+  }
 }
