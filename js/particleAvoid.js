@@ -4,6 +4,7 @@ function RunParticleAvoid() {
   const codeImg = document.querySelector(".avatar");
   myCanvas.style.opacity = "0";
   context.fillStyle = "white";
+  context.lineWidth = 2;
   let intervalId;
   let shoulIntervalRun = true;
   let intervalRunningStatus = true;
@@ -138,10 +139,14 @@ function RunParticleAvoid() {
       // rotateImage(element);
       movePointOnCollission(element);
       movePointToDefaultPosition(element);
-      context.fillStyle = element[4];
+      // context.fillStyle = element[4];
+      context.strokeStyle = element[4];
       context.beginPath();
-      context.rect(element[0], element[1], squareSize, squareSize);
-      context.fill();
+      context.moveTo(element[0], element[1]);
+      context.lineTo(element[0] + squareSize, element[1]);
+      context.stroke();
+      // context.rect(element[0], element[1], squareSize, squareSize);
+      // context.fill();
       // console.log("drawing");
     }
     if (shoulIntervalRun === false) {

@@ -7,15 +7,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <script defer src="./index.js"></script>
-    <script defer src="./js/particle.js"></script>
+    <script defer type="module" src="./index.js"></script>
+    <!-- <script defer src="./js/particle.js"></script> -->
     <script defer src="./js/particleAvoid.js"></script>
     <script defer src="./js/Image.js"></script>
     <script defer src="./js/circles.js"></script>
@@ -26,15 +26,19 @@
       <nav class="navbar">
         <ul class="navlist">
           <li><button data-pageNo="0" class="nav-button btn">Home</button></li>
-          <li><button data-pageNo="1" class="nav-button btn">About</button></li>
           <li>
-            <button data-pageNo="2" class="nav-button btn">Projects</button>
+            <button data-pageNo="1" class="nav-button btn">Projects</button>
           </li>
+          <li><button data-pageNo="2" class="nav-button btn">About</button></li>
         </ul>
       </nav>
     </header>
     <main>
-      <section aria-expanded="false" class="full-sections front-section">
+      <section
+        aria-label="home"
+        data-side="left"
+        class="full-sections front-section"
+      >
         <div class="canvas-container">
           <canvas
             class="canvas"
@@ -44,7 +48,7 @@
           ></canvas>
           <img class="avatar" src="./assets/web-dev.png" alt="" />
         </div>
-        <div class="intro-div">
+        <div class="intro-div section-inside">
           <h1>Hello,</h1>
           <p>
             My name is Pradeep.P.S, I am an aspiring
@@ -64,14 +68,23 @@
           </div>
         </div>
       </section>
-      <section aria-expanded="true" class="full-sections">
+
+      <section aria-label="projects" data-side="right" class="full-sections">
+        <canvas
+          class="canvas"
+          id="my-canvas3"
+          height="800"
+          width="1600"
+        ></canvas>
+      </section>
+      <section aria-label="about" data-side="middle" class="full-sections">
         <canvas
           class="canvas"
           id="my-canvas2"
           height="800"
           width="1600"
         ></canvas>
-        <div class="about">
+        <div class="about section-inside">
           <section class="about-sections">
             <article>
               <h2>Skills</h2>
@@ -94,27 +107,66 @@
               <h2>Experience</h2>
               <div class="company">
                 <h3>Sirpi</h3>
-                
+                <div>
+                  <ul class="unordered-list">
+                    <li>
+                      <h4>Frontend Developer</h4>
+                      <p>Intern</p>
+                      <p class="text-md text-i">01/2023-05/2023</p>
+                    </li>
+                    <li>
+                      <h4>Frontend Developer</h4>
+                      <p>Full time</p>
+                      <p class="text-md text-i">06/2023-08/2023</p>
+                    </li>
+                    <li>
+                      <h4>Full Stack Developer</h4>
+                      <p>Full time</p>
+                      <p class="text-md text-i">09/2023-Present</p>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </article>
           </section>
           <section class="about-sections">
             <article>
-              <h2>Courses</h2>
+              <h2>Education</h2>
+              <div class="education-div">
+                <ul class="unordered-list">
+                  <li>
+                    <h3>B-Tech</h3>
+                    <p>Indian Institute Of Technology Madras</p>
+                    <p class="text-md text-i">07/2016 - 12/2020,</p>
+                  </li>
+                  <li>
+                    <h3>12th standard</h3>
+                    <p>Kerala State board</p>
+                    <p class="text-md text-i">06/2013 - 05/2015,</p>
+                  </li>
+                  <li>
+                    <h3>10th Standard</h3>
+                    <p>Kerala State board</p>
+                    <p class="text-md text-i">06/2003 - 04/2013,</p>
+                  </li>
+                </ul>
+              </div>
             </article>
             <article>
-              <h2>Education</h2>
+              <h2>Courses</h2>
+              <ul class="unordered-list">
+                <li>
+                  <h3>Full Stack Web Development Internship Program</h3>
+                  <p>Edureka</p>
+                  <p class="text-md text-i">08/2022 - 12/2022</p>
+                </li>
+              </ul>
+            </article>
+            <article>
+              <h2></h2>
             </article>
           </section>
         </div>
-      </section>
-      <section aria-expanded="false" class="full-sections">
-        <canvas
-          class="canvas"
-          id="my-canvas3"
-          height="800"
-          width="1600"
-        ></canvas>
       </section>
     </main>
   </body>
