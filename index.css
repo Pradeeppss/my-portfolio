@@ -22,7 +22,12 @@ body {
   cursor: pointer;
   color: inherit;
 }
-
+.text-md {
+  font-size: 0.7rem;
+}
+.text-i {
+  font-style: italic;
+}
 /* heading */
 
 .header {
@@ -71,15 +76,23 @@ main {
   overflow: hidden;
   isolation: isolate;
   position: absolute;
-  /* background-color: black; */
   background-color: var(--color-primary);
-
   transition: translate 500ms, opacity 500ms;
 }
-.full-sections[aria-expanded="false"] {
+.full-sections[data-side="left"] {
+  /* display: none; */
+  translate: -100%;
+  /* opacity: 0; */
+}
+.full-sections[data-side="middle"] {
+  /* display: none; */
+  translate: 0%;
+  /* opacity: 0; */
+}
+.full-sections[data-side="right"] {
   /* display: none; */
   translate: 100%;
-  opacity: 0;
+  /* opacity: 0; */
 }
 .full-sections:nth-child(1) {
   z-index: 3;
@@ -90,7 +103,12 @@ main {
 .full-sections:nth-child(3) {
   z-index: 1;
 }
-
+.section-inside {
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  z-index: 50;
+}
 /* canvas */
 .front-section {
   display: flex;
@@ -102,13 +120,12 @@ main {
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 20;
+  z-index: -1;
 }
 .canvas {
   position: absolute;
   object-fit: cover;
-}
-.canvas1 {
+  z-index: -1;
 }
 .intro-div {
   flex: 0.9;
@@ -126,12 +143,19 @@ main {
 .about {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 4rem 1rem;
 }
 .about-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 .about-sections > article {
-  border: 1px red solid;
+  /* border: 1px red solid; */
   padding: 1rem;
+  background-color: #cdfad50c;
+  border-radius: 0.3rem;
 }
 .skills {
   list-style: none;
@@ -180,6 +204,10 @@ main {
   z-index: -1;
   /* display: none; */
 }
+/* about */
+.unordered-list > li {
+  padding: 0.3rem 0rem;
+}
 @media only screen and (max-width: 1000px) {
   .intro-div {
     padding: 1rem 5rem;
@@ -191,5 +219,10 @@ main {
   #my-canvas1 {
     width: 300px;
     aspect-ratio: 1;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .intro-div {
+    padding: 0rem 3rem;
   }
 }
