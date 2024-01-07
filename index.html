@@ -9,11 +9,11 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
       rel="stylesheet"
-    />
+      />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+      />
     <script defer type="module" src="./index.js"></script>
     <!-- <script defer src="./js/particle.js"></script> -->
     <script defer src="./js/particleAvoid.js"></script>
@@ -36,16 +36,16 @@
     <main>
       <section
         aria-label="home"
-        data-side="left"
+        data-side="middle"
         class="full-sections front-section"
-      >
+        >
         <div class="canvas-container">
           <canvas
             class="canvas"
             id="my-canvas1"
             height="500"
             width="500"
-          ></canvas>
+            ></canvas>
           <img class="avatar" src="./assets/web-dev.png" alt="" />
         </div>
         <div class="intro-div section-inside">
@@ -62,7 +62,7 @@
             <a
               href="https://www.linkedin.com/in/pradeep-ps-2963751b1/"
               target="_blank"
-            >
+              >
               <i class="fa fa-linkedin-square fa-2x"></i>
             </a>
           </div>
@@ -73,17 +73,39 @@
         <canvas
           class="canvas"
           id="my-canvas3"
-          height="800"
+          height="1000"
           width="1600"
-        ></canvas>
+          ></canvas>
+        <section class="project">
+          <article class="project-card">
+            <div class="image-container"></div>
+            <div class="text-container">
+              <h2>Particle-fluid <a target="_blank" href="https://www.npmjs.com/package/particles-fluid">
+                  npm package
+                </a> 
+              </h2>
+              <p>Do you like the liquid like image in the home page?</p>
+              <p>Do you want to use this and other particle animations you see 
+                around this page.
+              </p>
+              <p>I have created an npm package that you can use to integrate 
+                these animations to your page with plenty of customizations.
+              </p>
+              <p>Visit the <a target="_blank"
+                              href="https://github.com/Pradeeppss/particles-fluid"> gitbub </a>page
+                            for more info</p>
+              <p>PS : work in progress</p>
+            </div>
+          </article>
+        </section>
       </section>
-      <section aria-label="about" data-side="middle" class="full-sections">
+      <section aria-label="about" data-side="right" class="full-sections">
         <canvas
           class="canvas"
           id="my-canvas2"
           height="800"
           width="1600"
-        ></canvas>
+          ></canvas>
         <div class="about section-inside">
           <section class="about-sections">
             <article>
@@ -161,9 +183,6 @@
                   <p class="text-md text-i">08/2022 - 12/2022</p>
                 </li>
               </ul>
-            </article>
-            <article>
-              <h2></h2>
             </article>
           </section>
         </div>

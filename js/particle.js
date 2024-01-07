@@ -1,8 +1,10 @@
 function particleWithLines() {
   const myCanvas = document.querySelector("#my-canvas3");
   const context = myCanvas.getContext("2d");
-
-  const gradient = context.createLinearGradient(0, 0, 1600, 0);
+	myCanvas.height = window.outerHeight;
+	myCanvas.width = window.outerWidth;
+console.log(window)
+  const gradient = context.createLinearGradient(0, 0, window.innerWidth, 0);
   gradient.addColorStop(0, "limegreen");
   gradient.addColorStop(1, "blue");
   context.lineWidth = 2;
@@ -10,8 +12,8 @@ function particleWithLines() {
   context.fillStyle = "white";
   //
   const particleAvoid = false;
-  const canvasWidth = 1600;
-  const canvasHeight = 800;
+  const canvasWidth = window.outerWidth;
+  const canvasHeight = window.outerHeight;
   const pointRadius = 2;
   const numberOfPoints = 160;
   const allowedDistanceBP = 240;

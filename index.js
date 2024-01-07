@@ -1,5 +1,4 @@
 import particleWithLines from "./js/particle.js";
-
 const navlist = document.querySelector(".navlist");
 const allPages = document.querySelectorAll(".full-sections");
 
@@ -27,6 +26,7 @@ function navigateToPageNo(pageNo) {
 }
 
 let particleWithLinesId;
+
 function toggleActivationOfCanvasInterval(pageNo) {
   switch (allPages[pageNo].getAttribute("aria-label")) {
     case "projects":
@@ -49,4 +49,5 @@ function clearAllIntervals(...ids) {
     console.log(id);
     clearInterval(id);
   }
+  
 }
