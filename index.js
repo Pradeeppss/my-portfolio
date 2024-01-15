@@ -4,6 +4,7 @@ const allPages = document.querySelectorAll(".full-sections");
 
 navlist.addEventListener("click", (e) => {
   let pageNo = e.target.getAttribute("data-pageNo");
+  if (allPages[pageNo].getAttribute("data-side") === "middle") return;
   if (pageNo) {
     navigateToPageNo(pageNo);
     toggleActivationOfCanvasInterval(pageNo);
@@ -47,7 +48,6 @@ function toggleActivationOfCanvasInterval(pageNo) {
 function clearAllIntervals(...ids) {
   for (let id of ids) {
     console.log(id);
-    clearInterval(id);
+    cancelAnimationFrame(id);
   }
-  
 }

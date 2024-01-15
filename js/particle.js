@@ -1,9 +1,8 @@
 function particleWithLines() {
   const myCanvas = document.querySelector("#my-canvas3");
   const context = myCanvas.getContext("2d");
-	myCanvas.height = window.outerHeight;
-	myCanvas.width = window.outerWidth;
-console.log(window)
+  myCanvas.height = window.outerHeight;
+  myCanvas.width = window.outerWidth;
   const gradient = context.createLinearGradient(0, 0, window.innerWidth, 0);
   gradient.addColorStop(0, "limegreen");
   gradient.addColorStop(1, "blue");
@@ -20,8 +19,8 @@ console.log(window)
   const mouseCircleRadius = 160;
   const xThreshold = [-50, canvasWidth + 50];
   const yThreshold = [-50, canvasHeight + 50];
-  const xRateChange = 8;
-  const yRateChange = 8;
+  const xRateChange = 4;
+  const yRateChange = 4;
   const frameRate = 30;
   const maxLines = 10;
 
@@ -45,9 +44,11 @@ console.log(window)
   }
   // console.log(pointsArray);
 
-  const intervalId = setInterval(() => {
+  function runAnimation() {
     createNewPoint();
-  }, 1000 / frameRate);
+    intervalId = requestAnimationFrame(runAnimation);
+  }
+  let intervalId = requestAnimationFrame(runAnimation);
   // setTimeout(() => {
   //   clearInterval(intervalId);
   // }, 1000);

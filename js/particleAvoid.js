@@ -117,40 +117,39 @@ function RunParticleAvoid() {
   myCanvas.style.opacity = 1;
   codeImg.style.display = "none";
   //
-  function StartInterval() {
+  let start = 0;
+  const fps = 50;
+  function startAnimation(time) {
     intervalRunningStatus = true;
-    const intervalId = setInterval(() => {
-      shoulIntervalRun = false;
-      drawNewPoints(pointsArray);
-    }, 1000 / frameRate);
-    return intervalId;
+    intervalId = requestAnimationFrame(startAnimation);
+    //    console.log(time);
+    if (time - start > 1000 / fps) {
+      //    console.log(time);
+      drawNewPoints();
+      start = time;
+    }
   }
-  function closeInterval() {
+  requestAnimationFrame(startAnimation);
+  function stopAnimation() {
+    cancelAnimationFrame(intervalId);
     intervalRunningStatus = false;
-    clearInterval(intervalId);
   }
-  intervalId = StartInterval();
-
   //   main function
-  function drawNewPoints(pointsArr) {
+  function drawNewPoints() {
     context.clearRect(0, 0, myCanvas.width, myCanvas.height);
-    for (let i = 0; i < pointsArr.length; i++) {
-      const element = pointsArr[i];
-      // rotateImage(element);
+    shoulIntervalRun = false;
+    for (let i = 0; i < pointsArray.length; i++) {
+      const element = pointsArray[i];
       movePointOnCollission(element);
       movePointToDefaultPosition(element);
-      // context.fillStyle = element[4];
       context.strokeStyle = element[4];
       context.beginPath();
       context.moveTo(element[0], element[1]);
       context.lineTo(element[0] + squareSize, element[1]);
       context.stroke();
-      // context.rect(element[0], element[1], squareSize, squareSize);
-      // context.fill();
-      // console.log("drawing");
     }
     if (shoulIntervalRun === false) {
-      closeInterval();
+      stopAnimation();
     }
   }
   function findDistanceBetween(point1, point2) {
@@ -238,7 +237,7 @@ function RunParticleAvoid() {
   });
   myCanvas.addEventListener("mouseover", () => {
     if (intervalRunningStatus === false) {
-      intervalId = StartInterval();
+      requestAnimationFrame(startAnimation);
     }
   });
 }
