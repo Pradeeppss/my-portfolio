@@ -25,11 +25,29 @@
     <header class="header">
       <nav class="navbar">
         <ul class="navlist">
-          <li><button data-pageNo="0" class="nav-button btn">Home</button></li>
           <li>
-            <button data-pageNo="1" class="nav-button btn">Projects</button>
+            <button aria-selected="true" data-pageNo="0" class="nav-button btn">
+              Home
+            </button>
           </li>
-          <li><button data-pageNo="2" class="nav-button btn">About</button></li>
+          <li>
+            <button
+              aria-selected="false"
+              data-pageNo="1"
+              class="nav-button btn"
+            >
+              Projects
+            </button>
+          </li>
+          <li>
+            <button
+              aria-selected="false"
+              data-pageNo="2"
+              class="nav-button btn"
+            >
+              About
+            </button>
+          </li>
         </ul>
       </nav>
     </header>

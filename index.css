@@ -63,7 +63,10 @@ a {
   background-color: var(--color-tertiary);
   color: var(--color-primary);
 }
-
+.nav-button[aria-selected="true"] {
+  background-color: var(--color-tertiary);
+  color: var(--color-primary);
+}
 /* sections  */
 main {
   height: 100vh;
